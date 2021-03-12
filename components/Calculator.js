@@ -13,6 +13,17 @@ export default function Calculator() {
     const [fps, setFps] = useState(20);
     const [formatQualityActivity, setFormatQualityActivity] = useState(0);
     const [requiredStorage, setRequiredStorage] = useState('---');
+    const [recommendedHD, setRecommendedHD] = useState({
+        size: '1TB',
+        price: '$65.00',
+        link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
+    })
+    const [isRecommendedHDSingle, setIsRecommendedHDSingle] = useState(true);
+    const [additionalHD, setAdditionalHD] = useState({
+        size: '1TB',
+        price: '$65.00',
+        link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
+    })
 
     const KILOBYTE = 1000;
 
@@ -108,21 +119,129 @@ export default function Calculator() {
         }
     }, [videoFormat, videoQuality, sceneActivity])
 
+    // Calculate requiredStorage
     useEffect(() => {
         let colorPixelSize = (resolution < 824400 ? 16 : 30)
         let requiredBandwith = resolution * colorPixelSize * fps * numberOfCameras / formatQualityActivity;
         let bytesTotal = requiredBandwith / 8 * 86400 * daysOfStorage * (hoursPerDay / 24);
         let terabytes = (bytesTotal / (KILOBYTE * KILOBYTE * KILOBYTE * KILOBYTE)).toFixed(3);
 
-        console.log(requiredBandwith);
-        console.log(bytesTotal);
-        console.log(terabytes);
         setRequiredStorage(terabytes);
     }, [formatQualityActivity, resolution, numberOfCameras, fps, daysOfStorage, hoursPerDay])
+
+    // Change recommended product when requiredStorage changes
+    useEffect(() => {
+        if(requiredStorage < 1.000) {
+            setRecommendedHD({
+                size: '1TB',
+                price: '$65.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
+            })
+            setIsRecommendedHDSingle(true);
+        }
+        if (requiredStorage > 0.999){
+            setRecommendedHD({
+                size: '2T',
+                price: '$99.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/2-terabyte-internal-hard-drive.html'
+            })
+            setIsRecommendedHDSingle(true);
+        }
+        if(requiredStorage > 1.999) {
+            setRecommendedHD({
+                size: '4T',
+                price: '$189.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/4-terabyte-internal-hard-drive.html'
+            })
+            setIsRecommendedHDSingle(true);
+        }
+        if(requiredStorage > 3.999) {
+            setRecommendedHD({
+                size: '8T',
+                price: '$349.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/8-terabyte-internal-hard-drive.html'
+            })
+            setIsRecommendedHDSingle(true);
+        }
+        if(requiredStorage > 7.999) {
+            setRecommendedHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            })
+            setIsRecommendedHDSingle(true);
+        }
+        if(requiredStorage > 9.999) {
+            setIsRecommendedHDSingle(false);
+            setRecommendedHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            });
+            setAdditionalHD({
+                size: '1TB',
+                price: '$65.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
+            });
+        }
+        if(requiredStorage > 10.999) {
+            setIsRecommendedHDSingle(false);
+            setRecommendedHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            });
+            setAdditionalHD({
+                size: '2T',
+                price: '$99.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/2-terabyte-internal-hard-drive.html'
+            });
+        }
+        if(requiredStorage > 11.999) {
+            setIsRecommendedHDSingle(false);
+            setRecommendedHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            });
+            setAdditionalHD({
+                size: '4T',
+                price: '$189.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/4-terabyte-internal-hard-drive.html'
+            });
+        }
+        if(requiredStorage > 13.999) {
+            setIsRecommendedHDSingle(false);
+            setRecommendedHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            });
+            setAdditionalHD({
+                size: '8T',
+                price: '$349.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/8-terabyte-internal-hard-drive.html'
+            });
+        }
+        if(requiredStorage > 17.999) {
+            setIsRecommendedHDSingle(false);
+            setRecommendedHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            });
+            setAdditionalHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            });
+        }
+    }, [requiredStorage])
 
     const input_styles = "ml-5 mt-1 border-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 "; 
     const radio_styles = "mr-3 my-3 border-gray-300 text-green-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 ";
     const info_styles = "inline-block align-bottom ml-1 mb-1 border rounded-full bg-gray-50 cursor-pointer hover:bg-gray-100";
+    const productCard_styles = "border border-purple-300 flex flex-col justify-center items-center hover:shadow-lg ";
 
     const numberOfCameras_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 32, 48, 64];
 
@@ -198,6 +317,7 @@ export default function Calculator() {
                             className={input_styles + "w-24"} 
                             value={daysOfStorage}
                             onChange={handleChanges}
+                            min={1}
                         />
                     </div>
 
@@ -284,21 +404,39 @@ export default function Calculator() {
                 
                 <div className="w-5/12 flex flex-col">
                     <div className="p-5 border-2 border-purple-700 mt-5 mb-10">
-                        <h4 className="text-2xl mb-3">Storage Capacity Required</h4>
-                        <span>{requiredStorage} TB</span>
+                        <h4 className="text-xl mb-3 text-center">Storage Capacity Required</h4>
+                        <div className="text-center text-3xl">{requiredStorage} TB</div>
                     </div>
                         
-                    <div className="flex flex-row justify-center">
-                        <div className="p-5 border border-purple-300 flex flex-col justify-center items-center cursor-pointer hover:shadow-lg">
-                            <h5 className="text-xl mb-3">Recommended Product</h5>
-                            <div className="py-5">
-                                <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={180} height={144}/></div>
-                                <span className="text-lg font-light m-3">2T Hard Drive</span>
-                                <span className="block ml-3 text-base text-yellow-600">$49.99</span>
-                            </div>
+                    <a href={recommendedHD.link} target="_blank" className={productCard_styles + (isRecommendedHDSingle ? 'p-5' : 'hidden')}>
+                        <h5 className="text-xl mb-3">Recommended Product</h5>
+                        <div className="py-5">
+                            <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
+                            <span className="text-xl font-light m-3">{recommendedHD.size} Hard Drive</span>
+                            <span className="block ml-3 text-base text-yellow-600">{recommendedHD.price}</span>
+                        </div>
+                    </a>
+                    
+                    <div className={"border border-purple-300 flex flex-col items-center justify-center py-7 px-4 " + (isRecommendedHDSingle ? 'hidden' : '')}>
+                        <h5 className="text-xl mb-3">Recommended Products</h5>
+                        <div className="flex flex-row justify-evenly items-center my-5">
+                            <a href={recommendedHD.link} target="_blank" className={productCard_styles + "p-2"}>
+                                <div className="py-5">
+                                    <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
+                                    <span className="text-base font-normal">{recommendedHD.size} Hard Drive</span>
+                                    <span className="block ml-3 text-base text-yellow-600">{recommendedHD.price}</span>
+                                </div>
+                            </a>
+                            <div className="text-4xl mx-3 text-purple-700">+</div>
+                            <a href={additionalHD.link} target="_blank" className={productCard_styles + "p-2"}>
+                                <div className="py-5">
+                                    <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
+                                    <span className="text-base font-normal">{additionalHD.size} Hard Drive</span>
+                                    <span className="block ml-3 text-base text-yellow-600">{additionalHD.price}</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
