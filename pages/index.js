@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Calculator from '../components/Calculator'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -10,10 +11,6 @@ export default function Home() {
       </Head>
 
       <main className={"my-10"}>
-        <h1 className={"my-10 text-center text-4xl"}>
-          Hard Drive Calculator
-        </h1>
-
         <Calculator />
 
       </main>

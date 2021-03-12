@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import {BsInfo} from 'react-icons/bs'
+import {BsInfo} from 'react-icons/bs';
+import Image from 'next/image';
 
 export default function Calculator() {
     const [numberOfCameras, setNumberOfCameras] = useState(1);
@@ -119,9 +120,9 @@ export default function Calculator() {
         setRequiredStorage(terabytes);
     }, [formatQualityActivity, resolution, numberOfCameras, fps, daysOfStorage, hoursPerDay])
 
-    const input_styles = "ml-5 mt-1 rounded border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 "; 
+    const input_styles = "ml-5 mt-1 border-purple-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 "; 
     const radio_styles = "mr-3 my-3 border-gray-300 text-green-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 ";
-    const info_styles = "inline-block align-bottom ml-2 border rounded-full bg-gray-50 cursor-pointer hover:bg-gray-100";
+    const info_styles = "inline-block align-bottom ml-1 mb-1 border rounded-full bg-gray-50 cursor-pointer hover:bg-gray-100";
 
     const numberOfCameras_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 32, 48, 64];
 
@@ -166,8 +167,14 @@ export default function Calculator() {
     }
 
     return(
-        <section className="m-10 border rounded p-10 text-xl flex flex-row justify-center">
-            <div className="flex flex-row justify-between sm:w-full md:w-8/12 lg:w-6/12 xl:w-5/12 2xl:4/12">
+        <>
+        <div className="w-full flex flex-row justify-center">
+            <Image src='/images/header.png' width={900} height={104}/>
+        </div>
+        
+        <div className="flex flex-row justify-center">
+        <section className="border-2 border-purple-300 w-900 p-10 text-xl ">
+            <div className="flex flex-row justify-between ">
                 <div className="flex flex-col justify-evenly w-5/12">
                     <div className="my-5 flex flex-row justify-between items-center">
                         <label for="numberOfCameras">Number of cameras:</label>
@@ -206,34 +213,17 @@ export default function Calculator() {
                         </select>
                     </div>
 
-                    <div className="my-5">
-                        <p className="mb-3">Select a video format:<span className={info_styles}><BsInfo /></span></p>
-                        <div className="flex flex-row" onChange={handleChanges}>
-                            <div className="flex items-center ml-3 mr-5">
-                                <input 
-                                    type="radio" 
-                                    id="h264" 
-                                    name="videoFormat" 
-                                    value="h264" 
-                                    className={radio_styles + "cursor-pointer"}
-                                    checked={videoFormat == 'h264'}
-                                />
-                                <label for="h264" className="cursor-pointer font-light">H264</label>
-                            </div>
-
-                            <div className="flex items-center ml-3">
-                                <input 
-                                    type="radio" 
-                                    id="h265" 
-                                    name="videoFormat" 
-                                    value="h265" 
-                                    className={radio_styles + "cursor-pointer"}
-                                    checked={videoFormat == 'h265'}
-                                />
-                                <label for="h265" className="cursor-pointer font-light">H265</label>
-                            </div>
-                        </div>
-                        
+                    <div className="my-5 flex flex-row items-center justify-between">
+                        <label for="videoFormat" className="">Video format:<span className={info_styles}><BsInfo /></span></label>
+                            <select 
+                                name="videoFormat" 
+                                value={videoFormat} 
+                                className={input_styles} 
+                                onChange={handleChanges}
+                            >
+                                <option value="h264">H264</option>
+                                <option value="h265">H265</option>
+                            </select>
                     </div>
                     
                     <div className="my-5 flex flex-row items-center justify-between">
@@ -249,84 +239,32 @@ export default function Calculator() {
                         </select>
                     </div>
 
-                    <div className="my-5" onChange={handleChanges}>
-                        <p className="mb-3">Video Quality:<span className={info_styles}><BsInfo /></span></p>
-
-                        <div className="flex items-center ml-3">
-                            <input 
-                                type="radio" 
-                                id="highQuality" 
+                    <div className="my-5 flex flex-row items-center justify-between">
+                        <label for="videoQuality" className="">Video Quality:<span className={info_styles}><BsInfo /></span></label>
+                            <select 
                                 name="videoQuality" 
-                                value="high" 
-                                className={radio_styles + "cursor-pointer"}
-                                checked={videoQuality == 'high'}    
-                            />
-                            <label for="highQuality" className="cursor-pointer font-light">High</label>
-                        </div>
-                        
-                        <div className="flex items-center ml-3">
-                            <input 
-                                type="radio" 
-                                id="mediumQuality" 
-                                name="videoQuality" 
-                                value="medium" 
-                                className={radio_styles + "cursor-pointer"}
-                                checked={videoQuality == 'medium'}    
-                            />
-                            <label for="mediumQuality" className="cursor-pointer font-light">Medium</label>
-                        </div>
-
-                        <div className="flex items-center ml-3">
-                            <input 
-                                type="radio" 
-                                id="lowQuality" 
-                                name="videoQuality" 
-                                value="low" 
-                                className={radio_styles + "cursor-pointer"}
-                                checked={videoQuality == 'low'}    
-                            />
-                            <label for="lowQuality" className="cursor-pointer font-light">Low</label>
-                        </div>
+                                value={videoQuality} 
+                                className={input_styles} 
+                                onChange={handleChanges}
+                            >
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
                     </div>
 
-                    <div className="my-5" onChange={handleChanges}>
-                        <p className="mb-3">Scene Activity:<span className={info_styles}><BsInfo /></span></p>
-
-                        <div className="flex items-center ml-3">
-                            <input 
-                                type="radio" 
-                                id="highActivity" 
+                    <div className="my-5 flex flex-row items-center justify-between">
+                        <label for="videoQuality" className="">Video Quality:<span className={info_styles}><BsInfo /></span></label>
+                            <select 
                                 name="sceneActivity" 
-                                value="high" 
-                                className={radio_styles + "cursor-pointer"}
-                                checked={sceneActivity == 'high'}
-                            />
-                            <label for="highActivity" className="cursor-pointer font-light">High</label>
-                        </div>
-                        
-                        <div className="flex items-center ml-3">
-                            <input 
-                                type="radio" 
-                                id="mediumActivity" 
-                                name="sceneActivity" 
-                                value="medium" 
-                                className={radio_styles + "cursor-pointer"}
-                                checked={sceneActivity == 'medium'}
-                            />
-                            <label for="mediumActivity" className="cursor-pointer font-light">Medium</label>
-                        </div>
-
-                        <div className="flex items-center ml-3">
-                            <input 
-                                type="radio" 
-                                id="lowActivity" 
-                                name="sceneActivity" 
-                                value="low" 
-                                className={radio_styles + "cursor-pointer"}
-                                checked={sceneActivity == 'low'}    
-                            />
-                            <label for="lowActivity" className="cursor-pointer font-light">Low</label>
-                        </div>
+                                value={sceneActivity} 
+                                className={input_styles} 
+                                onChange={handleChanges}
+                            >
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
                     </div>
 
                     <div className="flex flex-row items-center justify-between">
@@ -345,13 +283,27 @@ export default function Calculator() {
                 </div>
                 
                 <div className="w-5/12 flex flex-col">
-                    {/* TODO: Results */}
-                    <div className="p-5 border rounded">
+                    <div className="p-5 border-2 border-purple-700 mt-5 mb-10">
                         <h4 className="text-2xl mb-3">Storage Capacity Required</h4>
                         <span>{requiredStorage} TB</span>
                     </div>
+                        
+                    <div className="flex flex-row justify-center">
+                        <div className="p-5 border border-purple-300 flex flex-col justify-center items-center cursor-pointer hover:shadow-lg">
+                            <h5 className="text-xl mb-3">Recommended Product</h5>
+                            <div className="py-5">
+                                <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={180} height={144}/></div>
+                                <span className="text-lg font-light m-3">2T Hard Drive</span>
+                                <span className="block ml-3 text-base text-yellow-600">$49.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
+        
+        </div>
+        </>
     )
 }

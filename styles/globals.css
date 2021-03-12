@@ -18,3 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.w-900 {
+  width: 900px;
+}
