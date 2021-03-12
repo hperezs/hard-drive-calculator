@@ -24,6 +24,7 @@ export default function Calculator() {
         price: '$65.00',
         link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
     })
+    const [isRecommendedVisible, setIsRecommendedVisible] = useState(true);
 
     const KILOBYTE = 1000;
 
@@ -138,6 +139,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
+            setIsRecommendedVisible(true);
         }
         if (requiredStorage > 0.999){
             setRecommendedHD({
@@ -146,6 +148,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/2-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
+            setIsRecommendedVisible(true);
         }
         if(requiredStorage > 1.999) {
             setRecommendedHD({
@@ -154,6 +157,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/4-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
+            setIsRecommendedVisible(true);
         }
         if(requiredStorage > 3.999) {
             setRecommendedHD({
@@ -162,6 +166,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/8-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
+            setIsRecommendedVisible(true);
         }
         if(requiredStorage > 7.999) {
             setRecommendedHD({
@@ -170,8 +175,10 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
+            setIsRecommendedVisible(true);
         }
         if(requiredStorage > 9.999) {
+            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -185,6 +192,7 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 10.999) {
+            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -198,6 +206,7 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 11.999) {
+            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -211,6 +220,7 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 13.999) {
+            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -224,6 +234,7 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 17.999) {
+            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -235,6 +246,9 @@ export default function Calculator() {
                 price: '$449.00',
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
             });
+        }
+        if(requiredStorage > 19.999) {
+            setIsRecommendedVisible(false);
         }
     }, [requiredStorage])
 
@@ -408,7 +422,7 @@ export default function Calculator() {
                         <div className="text-center text-3xl">{requiredStorage} TB</div>
                     </div>
                         
-                    <a href={recommendedHD.link} target="_blank" className={productCard_styles + (isRecommendedHDSingle ? 'p-5' : 'hidden')}>
+                    <a href={recommendedHD.link} target="_blank" className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-5' : 'hidden')}>
                         <h5 className="text-xl mb-3">Recommended Product</h5>
                         <div className="py-5">
                             <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
@@ -417,7 +431,7 @@ export default function Calculator() {
                         </div>
                     </a>
                     
-                    <div className={"border border-purple-300 flex flex-col items-center justify-center py-7 px-4 " + (isRecommendedHDSingle ? 'hidden' : '')}>
+                    <div className={"border border-purple-300 flex flex-col items-center justify-center py-7 px-4 " + (!isRecommendedHDSingle && isRecommendedVisible ? '' : 'hidden')}>
                         <h5 className="text-xl mb-3">Recommended Products</h5>
                         <div className="flex flex-row justify-evenly items-center my-5">
                             <a href={recommendedHD.link} target="_blank" className={productCard_styles + "p-2"}>
