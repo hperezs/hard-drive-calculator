@@ -120,8 +120,8 @@ export default function Calculator() {
         setRequiredStorage(terabytes);
     }, [formatQualityActivity, resolution, numberOfCameras, fps, daysOfStorage, hoursPerDay])
 
-    const input_styles = "ml-5 mt-1 border-purple-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 "; 
-    const radio_styles = "mr-3 my-3 border-gray-300 text-green-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 ";
+    const input_styles = "ml-5 mt-1 border-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 "; 
+    const radio_styles = "mr-3 my-3 border-gray-300 text-green-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 ";
     const info_styles = "inline-block align-bottom ml-1 mb-1 border rounded-full bg-gray-50 cursor-pointer hover:bg-gray-100";
 
     const numberOfCameras_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 32, 48, 64];
