@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import {BsInfo} from 'react-icons/bs';
-import Image from 'next/image';
+import { useEffect, useState } from 'react'
+import {BsInfo} from 'react-icons/bs'
+import Image from 'next/image'
+import ReactToolTip from 'react-tooltip'
 
 export default function Calculator() {
     const [numberOfCameras, setNumberOfCameras] = useState(1);
@@ -25,6 +26,7 @@ export default function Calculator() {
         link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
     })
     const [isRecommendedVisible, setIsRecommendedVisible] = useState(true);
+    const [recommendedHDMultiplier, setRecommendedHDMultiplier] = useState(0);
 
     const KILOBYTE = 1000;
 
@@ -139,7 +141,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
-            setIsRecommendedVisible(true);
+            setRecommendedHDMultiplier(0);
         }
         if (requiredStorage > 0.999){
             setRecommendedHD({
@@ -148,7 +150,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/2-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
-            setIsRecommendedVisible(true);
+            setRecommendedHDMultiplier(0);
         }
         if(requiredStorage > 1.999) {
             setRecommendedHD({
@@ -157,7 +159,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/4-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
-            setIsRecommendedVisible(true);
+            setRecommendedHDMultiplier(0);
         }
         if(requiredStorage > 3.999) {
             setRecommendedHD({
@@ -166,7 +168,7 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/8-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
-            setIsRecommendedVisible(true);
+            setRecommendedHDMultiplier(0);
         }
         if(requiredStorage > 7.999) {
             setRecommendedHD({
@@ -175,10 +177,9 @@ export default function Calculator() {
                 link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
             })
             setIsRecommendedHDSingle(true);
-            setIsRecommendedVisible(true);
+            setRecommendedHDMultiplier(0);
         }
         if(requiredStorage > 9.999) {
-            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -192,7 +193,6 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 10.999) {
-            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -206,7 +206,6 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 11.999) {
-            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -220,7 +219,6 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 13.999) {
-            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -234,7 +232,6 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 17.999) {
-            setIsRecommendedVisible(true);
             setIsRecommendedHDSingle(false);
             setRecommendedHD({
                 size: '10T',
@@ -248,13 +245,21 @@ export default function Calculator() {
             });
         }
         if(requiredStorage > 19.999) {
-            setIsRecommendedVisible(false);
+            setIsRecommendedHDSingle(true);
+            setRecommendedHDMultiplier(0);
+            let multiplier = Math.ceil(requiredStorage / 10);
+            setRecommendedHDMultiplier(multiplier);
+            setRecommendedHD({
+                size: '10T',
+                price: '$449.00',
+                link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
+            });
         }
     }, [requiredStorage])
 
     const input_styles = "ml-5 mt-1 border-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 "; 
     const radio_styles = "mr-3 my-3 border-gray-300 text-green-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 ";
-    const info_styles = "inline-block align-bottom ml-1 mb-1 border rounded-full bg-gray-50 cursor-pointer hover:bg-gray-100";
+    const info_styles = "inline-block align-bottom text-purple-800 ml-1 mb-1 border rounded-full bg-gray-50 cursor-pointer hover:bg-gray-100";
     const productCard_styles = "border border-purple-300 flex flex-col justify-center items-center hover:shadow-lg ";
 
     const numberOfCameras_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 32, 48, 64];
@@ -348,16 +353,22 @@ export default function Calculator() {
                     </div>
 
                     <div className="my-5 flex flex-row items-center justify-between">
-                        <label for="videoFormat" className="">Video format:<span className={info_styles}><BsInfo /></span></label>
-                            <select 
-                                name="videoFormat" 
-                                value={videoFormat} 
-                                className={input_styles} 
-                                onChange={handleChanges}
-                            >
-                                <option value="h264">H264</option>
-                                <option value="h265">H265</option>
-                            </select>
+                        <label for="videoFormat">Video format:<a data-tip data-for="video-format" className={info_styles}><BsInfo /></a></label>
+                        <ReactToolTip id="video-format" place="right" type="dark" effect="solid" >
+                            <p className="font-light text-lg">
+                                H264 takes much less processing power to compress, <br/> but results in taking up more storage. <br/>
+                                H265 provides much more storage space,<br/> but takes more processing power to compress.
+                            </p>
+                        </ReactToolTip>
+                        <select 
+                            name="videoFormat" 
+                            value={videoFormat} 
+                            className={input_styles} 
+                            onChange={handleChanges}
+                        >
+                            <option value="h264">H264</option>
+                            <option value="h265">H265</option>
+                        </select>
                     </div>
                     
                     <div className="my-5 flex flex-row items-center justify-between">
@@ -374,21 +385,36 @@ export default function Calculator() {
                     </div>
 
                     <div className="my-5 flex flex-row items-center justify-between">
-                        <label for="videoQuality" className="">Video Quality:<span className={info_styles}><BsInfo /></span></label>
-                            <select 
-                                name="videoQuality" 
-                                value={videoQuality} 
-                                className={input_styles} 
-                                onChange={handleChanges}
-                            >
-                                <option value="high">High</option>
-                                <option value="medium">Medium</option>
-                                <option value="low">Low</option>
-                            </select>
+                        <label for="videoQuality">
+                            Video Quality:<a data-tip data-for="video-quality" className={info_styles}><BsInfo /></a>
+                        </label>
+                        <ReactToolTip border="true" borderColor="gray" id="video-quality" type="dark" place="right" effect="solid">
+                            <p className="font-light text-lg">
+                            Video quality describes the level of visual detail <br/> for the video format selected.  This setting can be<br/> configured on some cameras.  If the setting is not <br/>available in your camera, select Medium.
+                            </p>
+                        </ReactToolTip>
+                        <select 
+                            name="videoQuality" 
+                            value={videoQuality} 
+                            className={input_styles} 
+                            onChange={handleChanges}
+                        >
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
                     </div>
 
+                    
+
                     <div className="my-5 flex flex-row items-center justify-between">
-                        <label for="videoQuality" className="">Video Quality:<span className={info_styles}><BsInfo /></span></label>
+                        <label for="sceneActivity">
+                            Scene Activity:<a data-tip data-for="scene-activity" className={info_styles}><BsInfo /></a>
+                        </label>
+                        <ReactToolTip id="scene-activity" type="dark" place="right" effect="solid" >
+                            <p className="font-light text-lg">Scene Activity describes the expected level of scene <br /> activity/movement in the video being captured. <br/> Higher activity will result in higher capacity needed.<br></br> For example, high scene activity could include a busy <br /> street or a building lobby. Low scene activity could <br/> include a hallway or door entrance.</p>
+                        </ReactToolTip>
+
                             <select 
                                 name="sceneActivity" 
                                 value={sceneActivity} 
@@ -425,9 +451,12 @@ export default function Calculator() {
                     <a href={recommendedHD.link} target="_blank" className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-5' : 'hidden')}>
                         <h5 className="text-xl mb-3">Recommended Product</h5>
                         <div className="py-5">
-                            <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
-                            <span className="text-xl font-light m-3">{recommendedHD.size} Hard Drive</span>
-                            <span className="block ml-3 text-base text-yellow-600">{recommendedHD.price}</span>
+                            <div><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
+                            <span className="text-xl font-light m-3">
+                                {recommendedHD.size} Hard Drive
+                                <span className={"text-purple-600 font-normal " + (recommendedHDMultiplier ? '' : 'hidden')}> x{recommendedHDMultiplier}</span>
+                            </span>
+                            <span className="block ml-3 text-base text-purple-900">{recommendedHD.price}</span>
                         </div>
                     </a>
                     
@@ -436,17 +465,17 @@ export default function Calculator() {
                         <div className="flex flex-row justify-evenly items-center my-5">
                             <a href={recommendedHD.link} target="_blank" className={productCard_styles + "p-2"}>
                                 <div className="py-5">
-                                    <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
+                                    <div><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
                                     <span className="text-base font-normal">{recommendedHD.size} Hard Drive</span>
-                                    <span className="block ml-3 text-base text-yellow-600">{recommendedHD.price}</span>
+                                    <span className="block ml-3 text-base text-purple-900">{recommendedHD.price}</span>
                                 </div>
                             </a>
                             <div className="text-4xl mx-3 text-purple-700">+</div>
                             <a href={additionalHD.link} target="_blank" className={productCard_styles + "p-2"}>
                                 <div className="py-5">
-                                    <div className=""><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
+                                    <div><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
                                     <span className="text-base font-normal">{additionalHD.size} Hard Drive</span>
-                                    <span className="block ml-3 text-base text-yellow-600">{additionalHD.price}</span>
+                                    <span className="block ml-3 text-base text-purple-900">{additionalHD.price}</span>
                                 </div>
                             </a>
                         </div>
