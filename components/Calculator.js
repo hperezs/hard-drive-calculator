@@ -301,7 +301,7 @@ export default function Calculator() {
         <div className="flex flex-row justify-center">
         <section className="border-2 border-purple-300 w-900 p-10 text-xl ">
             <div className="flex flex-row justify-between ">
-                <div className="flex flex-col justify-evenly w-5/12">
+                <div className="width-42 flex flex-col justify-evenly">
                     <div className="my-5 flex flex-row justify-between items-center">
                         <label>Number of cameras:</label>
                         <div>
