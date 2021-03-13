@@ -247,7 +247,7 @@ export default function Calculator() {
     }, [requiredStorage])
 
     const input_styles = "ml-5 mt-1 border-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 "; 
-    const info_styles = "inline-block align-bottom text-white ml-1 mb-1 border rounded-full bg-purple-500 cursor-pointer hover:bg-purple-400";
+    const info_styles = "inline-block align-center text-white ml-2 border rounded-full bg-purple-500 cursor-pointer hover:bg-purple-400";
     const productCard_styles = "border border-purple-300 flex flex-col justify-center items-center hover:shadow-lg ";
 
     const numberOfCameras_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 32, 48, 64];
@@ -303,105 +303,129 @@ export default function Calculator() {
             <div className="flex flex-row justify-between ">
                 <div className="flex flex-col justify-evenly w-5/12">
                     <div className="my-5 flex flex-row justify-between items-center">
-                        <label>Number of cameras:<a className={info_styles}><BsInfo /></a></label>
-                        <select 
+                        <label>Number of cameras:</label>
+                        <div>
+                            <select 
                             name="numberOfCameras" 
                             className={input_styles + "w-24"}
                             value={numberOfCameras}
                             onChange={handleChanges}
-                        >
-                            {numberOfCameras_options.map(number => {
-                                return(<option key={number}>{number}</option>)
-                            })}
-                        </select>
+                            >
+                                {numberOfCameras_options.map(number => {
+                                    return(<option key={number}>{number}</option>)
+                                })}
+                            </select>
+                            <a className={info_styles}><BsInfo /></a>
+                        </div>
+                        
                     </div>
 
                     <div className="my-5 flex flex-row justify-between items-center">
-                        <label>Days of storage:<a className={info_styles}><BsInfo /></a></label>
-                        <input 
-                            name="daysOfStorage" 
-                            type="number" 
-                            className={input_styles + "w-24"} 
-                            value={daysOfStorage}
-                            onChange={handleChanges}
-                            min={1}
-                        />
+                        <label>Days of storage:</label>
+                        <div>
+                            <input 
+                                name="daysOfStorage" 
+                                type="number" 
+                                className={input_styles + "w-24"} 
+                                value={daysOfStorage}
+                                onChange={handleChanges}
+                                min={1}
+                            />
+                            <a className={info_styles}><BsInfo /></a>
+                        </div>
+                        
                     </div>
 
                     <div className="my-5 flex flex-row justify-between items-center">
-                        <label>Hours per day:<a className={info_styles}><BsInfo /></a></label>
-                        <select 
-                            name="hoursPerDay" 
-                            className={input_styles + "w-24"}
-                            value={hoursPerDay}
-                            onChange={handleChanges}
-                        >
-                            {hoursPerDay_options}
-                        </select>
+                        <label>Hours per day:</label>
+                        <div>
+                            <select 
+                                name="hoursPerDay" 
+                                className={input_styles + "w-24"}
+                                value={hoursPerDay}
+                                onChange={handleChanges}
+                            >
+                                {hoursPerDay_options}
+                            </select>
+                            <a className={info_styles}><BsInfo /></a>
+                        </div>
+                        
                     </div>
 
                     <div className="my-5 flex flex-row items-center justify-between">
-                        <label>Video format:<a className={info_styles}><BsInfo /></a></label>
-                        <select 
-                            name="videoFormat" 
-                            value={videoFormat} 
-                            className={input_styles} 
-                            onChange={handleChanges}
-                        >
-                            <option value="h264">H264</option>
-                            <option value="h265">H265</option>
-                        </select>
+                        <label>Video format:</label>
+                        <div>
+                            <select 
+                                name="videoFormat" 
+                                value={videoFormat} 
+                                className={input_styles} 
+                                onChange={handleChanges}
+                            >
+                                <option value="h264">H264</option>
+                                <option value="h265">H265</option>
+                            </select>
+                            <a className={info_styles}><BsInfo /></a>
+                        </div>
                     </div>
                     
                     <div className="my-5 flex flex-row items-center justify-between">
-                        <label>Resolution:<a className={info_styles}><BsInfo /></a></label>
-                        <select name="resolution" className={input_styles} value={resolution} onChange={handleChanges}>
-                            <option value={8294400}>8MP (4K)</option>
-                            <option value={6291456}>6MP (3072x2048)</option>
-                            <option value={5038848}>5MP (2592x1944)</option>
-                            <option value={4085760}>4MP (2688x1520)</option>
-                            <option value={3145728}>3MP (2048x1536)</option>
-                            <option value={2073600}>2MP (1920x1080)</option>
-                            <option value={921600}>1MP (1280x720)</option>
-                        </select>
+                        <label>Resolution:</label>
+                        <div>
+                            <select name="resolution" className={input_styles} value={resolution} onChange={handleChanges}>
+                                <option value={8294400}>8MP (4K)</option>
+                                <option value={6291456}>6MP (3072x2048)</option>
+                                <option value={5038848}>5MP (2592x1944)</option>
+                                <option value={4085760}>4MP (2688x1520)</option>
+                                <option value={3145728}>3MP (2048x1536)</option>
+                                <option value={2073600}>2MP (1920x1080)</option>
+                                <option value={921600}>1MP (1280x720)</option>
+                            </select>
+                            <a className={info_styles}><BsInfo /></a>
+                        </div>
                     </div>
 
                     <div className="my-5 flex flex-row items-center justify-between">
                         <label>
-                            Video Quality:<a className={info_styles}><BsInfo /></a>
+                            Video Quality:
                         </label>
-                        <select 
-                            name="videoQuality" 
-                            value={videoQuality} 
-                            className={input_styles} 
-                            onChange={handleChanges}
-                        >
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                        </select>
+                        <div>
+                            <select 
+                                name="videoQuality" 
+                                value={videoQuality} 
+                                className={input_styles} 
+                                onChange={handleChanges}
+                            >
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                            <a className={info_styles}><BsInfo /></a>
+                        </div>
                     </div>
 
                     
 
                     <div className="my-5 flex flex-row items-center justify-between">
                         <label>
-                            Scene Activity:<a className={info_styles}><BsInfo /></a>
+                            Scene Activity:
                         </label>
-                        <select 
-                            name="sceneActivity" 
-                            value={sceneActivity} 
-                            className={input_styles} 
-                            onChange={handleChanges}
-                        >
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                        </select>
+                        <div>
+                            <select 
+                                name="sceneActivity" 
+                                value={sceneActivity} 
+                                className={input_styles} 
+                                onChange={handleChanges}
+                            >
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                            <a className={info_styles}><BsInfo /></a>
+                        </div>
                     </div>
 
                     <div className="flex flex-row items-center justify-between">
-                        <span>Frames per second (FPS):<a className={info_styles}><BsInfo /></a></span>
+                        <span>Frames per second (FPS):</span>
                         <select 
                             className={input_styles}
                             name="fps"
@@ -412,6 +436,7 @@ export default function Calculator() {
                                 return(<option key={number}>{number}</option>)
                             })}
                         </select>
+                        <a className={info_styles}><BsInfo /></a>
                     </div>
                 </div>
                 
