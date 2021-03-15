@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import {BsInfo} from 'react-icons/bs'
 import Image from 'next/image'
 import Tooltip from './Tooltip';
 
@@ -28,7 +27,6 @@ export default function Calculator() {
     })
     const [isRecommendedVisible, setIsRecommendedVisible] = useState(true);
     const [recommendedHDMultiplier, setRecommendedHDMultiplier] = useState(0);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const KILOBYTE = 1000;
 
@@ -254,14 +252,12 @@ export default function Calculator() {
     }, [requiredStorage])
 
     const input_styles = "ml-5 mt-1 border-green-600 shadow-sm cursor-pointer focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 "; 
-    const info_styles = "inline-block align-center text-white ml-2 border rounded-full bg-green-600 cursor-pointer hover:bg-green-400";
     const productCard_styles = "border border-green-700 bg-white flex flex-col justify-center items-center hover:shadow-lg hover:border-green-500 ";
 
     const numberOfCameras_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 32, 48, 64];
-
-    const hoursPerDay_options = [];
-    for(let i = 1; i <= 24; i++) {
-        hoursPerDay_options.push(<option key={i}>{i}</option>);
+    const daysOfStorage_options = [];
+    for(let i = 1; i <= 30; i++) {
+        daysOfStorage_options.push(<option key={i}>{i}</option>);
     }
 
     const fps_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30];
@@ -309,7 +305,7 @@ export default function Calculator() {
             <div className="bg-bg-texture bg-cover">
                 <section className="border-2 border-green-600 w-900 p-10 text-xl bg-white bg-opacity-30 ">
                 <div className="flex flex-row justify-between ">
-                    <div className="width-42 flex flex-col justify-between py-20">
+                    <div className="width-42 flex flex-col justify-between pt-16">
                         <div className="flex flex-row justify-between items-center">
                             <label>Number of cameras:</label>
                             <div>
@@ -331,14 +327,14 @@ export default function Calculator() {
                         <div className=" flex flex-row justify-between items-center">
                             <label>Days of storage:</label>
                             <div>
-                                <input 
+                                <select 
                                     name="daysOfStorage" 
-                                    type="number" 
                                     className={input_styles + "w-24"} 
                                     value={daysOfStorage}
                                     onChange={handleChanges}
-                                    min={1}
-                                />
+                                >
+                                    {daysOfStorage_options}
+                                </select>
                                 <span className="inline-block"><Tooltip inputType="daysOfStorage" /></span>
                             </div>
                             
@@ -422,6 +418,8 @@ export default function Calculator() {
                             </select>
                             <span className="inline-block"><Tooltip inputType="fps" /></span>
                         </div>
+
+                        <p className="text-sm pt-10 pb-5">*The values provided are an estimate. Actual performance may vary.</p>
                     </div>
                     
                     <div className="w-6/12 flex flex-col">
@@ -464,9 +462,10 @@ export default function Calculator() {
                             </div>
                         </div>
                         
-                        <div className="p-14">
+                        <div className="px-16 mt-10 mb-5">
                             <Image src="/images/BS_logo.png" width={400} height={106}/>
                         </div>
+                        
                         
                     </div>
                 </div>
