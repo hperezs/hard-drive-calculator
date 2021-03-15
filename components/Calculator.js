@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import Tooltip from './Tooltip';
+import Tooltip from './Tooltip'
+import { updateRecommendedHardDrives, calculateFormatQualityActivity } from '../lib/helper'
 
 
 export default function Calculator() {
@@ -30,126 +31,9 @@ export default function Calculator() {
 
     const KILOBYTE = 1000;
 
-    const TB1 = {
-        size: '1TB',
-        price: '$65.00',
-        link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/1-terabyte-internal-hard-drive.html'
-    };
-
-    const TB2 = {
-        size: '2T',
-        price: '$99.00',
-        link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/2-terabyte-internal-hard-drive.html'
-    };
-
-    const TB4 = {
-        size: '4T',
-        price: '$189.00',
-        link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/4-terabyte-internal-hard-drive.html'
-    }
-
-    const TB8 = {
-        size: '8T',
-        price: '$349.00',
-        link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/8-terabyte-internal-hard-drive.html'
-    }
-
-    const TB10 = {
-        size: '10T',
-        price: '$449.00',
-        link: 'https://www.backstreet-surveillance.com/cctv-parts/surveillance-hard-drives/10-terabyte-internal-hard-drive.html'
-    }
-
     // Calculate formatQualityActivity whenever values change
     useEffect(() => {
-        switch(videoFormat){
-            case('h264'):
-                switch(videoQuality) {
-                    case 'high':
-                        switch(sceneActivity) {
-                            case 'high':
-                                setFormatQualityActivity(98);
-                                break;
-                            case 'medium':
-                                setFormatQualityActivity(102);
-                                break;
-                            case 'low':
-                                setFormatQualityActivity(105);
-                                break;
-                        }
-                        break;
-                    case 'medium':
-                        switch(sceneActivity) {
-                            case 'high':
-                                setFormatQualityActivity(160);
-                                break;
-                            case 'medium':
-                                setFormatQualityActivity(173);
-                                break;
-                            case 'low':
-                                setFormatQualityActivity(181);
-                                break;
-                        }
-                        break;
-                    case 'low':
-                        switch(sceneActivity) {
-                            case 'high':
-                                setFormatQualityActivity(220);
-                                break;
-                            case 'medium':
-                                setFormatQualityActivity(242);
-                                break;
-                            case 'low':
-                                setFormatQualityActivity(260);
-                                break;
-                        }
-                        break;
-                }
-                break;
-            case('h265'):
-                switch(videoQuality) {
-                    case 'high':
-                        switch(sceneActivity) {
-                            case 'high':
-                                setFormatQualityActivity(260);
-                                break;
-                            case 'medium':
-                                setFormatQualityActivity(272);
-                                break;
-                            case 'low':
-                                setFormatQualityActivity(282);
-                                break;
-                        }
-                        break;
-                    case 'medium':
-                        switch(sceneActivity) {
-                            case 'high':
-                                setFormatQualityActivity(480);
-                                break;
-                            case 'medium':
-                                setFormatQualityActivity(510);
-                                break;
-                            case 'low':
-                                setFormatQualityActivity(536);
-                                break;
-                        }
-                        break;
-                    case 'low':
-                        switch(sceneActivity) {
-                            case 'high':
-                                setFormatQualityActivity(620);
-                                break;
-                            case 'medium':
-                                setFormatQualityActivity(670);
-                                break;
-                            case 'low':
-                                setFormatQualityActivity(710);
-                                break;
-                        }
-                        break;
-                }
-                break;
-        }
+        setFormatQualityActivity(calculateFormatQualityActivity(videoFormat, videoQuality, sceneActivity))
     }, [videoFormat, videoQuality, sceneActivity])
 
     // Calculate requiredStorage
@@ -169,86 +53,7 @@ export default function Calculator() {
 
     // Change recommended product when requiredStorage changes
     useEffect(() => {
-        if(requiredStorage < 1.000) {
-            setRecommendedHD(TB1)
-            setIsRecommendedHDSingle(true);
-            setRecommendedHDMultiplier(0);
-        }
-        if (requiredStorage > 0.999){
-            setRecommendedHD(TB2)
-            setIsRecommendedHDSingle(true);
-            setRecommendedHDMultiplier(0);
-        }
-        if(requiredStorage > 1.999) {
-            setRecommendedHD(TB4)
-            setIsRecommendedHDSingle(true);
-            setRecommendedHDMultiplier(0);
-        }
-        if(requiredStorage > 3.999) {
-            setRecommendedHD(TB8)
-            setIsRecommendedHDSingle(true);
-            setRecommendedHDMultiplier(0);
-        }
-        if(requiredStorage > 7.999) {
-            setRecommendedHD(TB10)
-            setIsRecommendedHDSingle(true);
-            setRecommendedHDMultiplier(0);
-        }
-        if(requiredStorage > 9.999) {
-            setIsRecommendedHDSingle(false);
-            setRecommendedHD(TB10);
-            setAdditionalHD(TB1);
-        }
-        if(requiredStorage > 10.999) {
-            setIsRecommendedHDSingle(false);
-            setRecommendedHD(TB10);
-            setAdditionalHD(TB2);
-        }
-        if(requiredStorage > 11.999) {
-            setIsRecommendedHDSingle(false);
-            setRecommendedHD(TB10);
-            setAdditionalHD(TB4);
-        }
-        if(requiredStorage > 13.999) {
-            setIsRecommendedHDSingle(false);
-            setRecommendedHD(TB10);
-            setAdditionalHD(TB8);
-        }
-        if(requiredStorage > 17.999) {
-            setIsRecommendedHDSingle(false);
-            setRecommendedHD(TB10);
-            setAdditionalHD(TB10);
-        }
-        if(requiredStorage > 19.999) {
-            setIsRecommendedHDSingle(false);
-            
-            let multiplier = Math.ceil(requiredStorage / 10) - 1;
-            setRecommendedHDMultiplier(multiplier);
-            setRecommendedHD(TB10);
-
-            let remainder = requiredStorage % 10;
-            console.log(remainder);
-            switch(true) {
-                case remainder < 1:
-                    setAdditionalHD(TB1);
-                    break;
-                case remainder < 2: 
-                    console.log('switch works');
-                    setAdditionalHD(TB2);
-                    break;
-                case remainder < 4:
-                    setAdditionalHD(TB4);
-                    break;
-                case remainder < 8:
-                    setAdditionalHD(TB8);
-                    break;
-                case remainder < 10: 
-                    setIsRecommendedHDSingle(true);
-                    setRecommendedHDMultiplier(multiplier + 1);
-                    break;
-            }
-            
-        }
+        updateRecommendedHardDrives(requiredStorage, setRecommendedHD, setIsRecommendedHDSingle, setRecommendedHDMultiplier, setAdditionalHD)
     }, [requiredStorage])
 
     const input_styles = "ml-5 mt-1 border-green-600 shadow-sm cursor-pointer focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 "; 

@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Calculator from '../components/Calculator'
-import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -12,7 +11,6 @@ export default function Home() {
 
       <main className={"my-10"}>
         <Calculator />
-
       </main>
 
     </div>
