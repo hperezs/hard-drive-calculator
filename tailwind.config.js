@@ -5,6 +5,10 @@ module.exports = {
     extend: {
       backgroundImage: theme => ({
         "bg-texture": "url('/images/texture.png')",
+      }),
+      colors: theme => ({
+        "green-tooltip": "#349e51",
+        "gray-tooltip": "#414241"
       })
     },
   },

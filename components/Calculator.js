@@ -323,7 +323,7 @@ export default function Calculator() {
                                         return(<option key={number}>{number}</option>)
                                     })}
                                 </select>
-                                <a className={info_styles}><BsInfo /></a>
+                                <span className="inline-block"><Tooltip inputType="numberOfCameras" /></span>
                             </div>
                             
                         </div>
@@ -339,7 +339,7 @@ export default function Calculator() {
                                     onChange={handleChanges}
                                     min={1}
                                 />
-                                <a className={info_styles}><BsInfo /></a>
+                                <span className="inline-block"><Tooltip inputType="daysOfStorage" /></span>
                             </div>
                             
                         </div>
@@ -355,7 +355,7 @@ export default function Calculator() {
                                     <option value="continuous">Continuous</option>
                                     <option value="motion">Motion Activated</option>
                                 </select>
-                                <a className={info_styles}><BsInfo /></a>
+                                <span className="inline-block"><Tooltip inputType="recordingType" /></span>
                             </div>
                             
                         </div>
@@ -372,7 +372,7 @@ export default function Calculator() {
                                     <option value="h264">H264</option>
                                     <option value="h265">H265</option>
                                 </select>
-                                <a className={info_styles}><BsInfo /></a>
+                                <span className="inline-block"><Tooltip inputType="videoFormat" /></span>
                             </div>
                         </div>
                         
@@ -388,7 +388,7 @@ export default function Calculator() {
                                     <option value={2073600}>2MP (1920x1080)</option>
                                     <option value={921600}>1MP (1280x720)</option>
                                 </select>
-                                <a className={info_styles}><BsInfo /></a>
+                                <span className="inline-block"><Tooltip inputType="resolution" /></span>
                             </div>
                         </div>
 
@@ -407,7 +407,7 @@ export default function Calculator() {
                                     <option value="medium">Medium</option>
                                     <option value="low">Low</option>
                                 </select>
-                                <a className={info_styles}><BsInfo /></a>
+                                <span className="inline-block"><Tooltip inputType="videoQuality" /></span>
                             </div>
                         </div>
 
@@ -423,7 +423,7 @@ export default function Calculator() {
                                     return(<option key={number}>{number}</option>)
                                 })}
                             </select>
-                            <a className={info_styles}><BsInfo /></a>
+                            <span className="inline-block"><Tooltip inputType="fps" /></span>
                         </div>
                     </div>
                     
@@ -470,8 +470,6 @@ export default function Calculator() {
                         <div className="p-14">
                             <Image src="/images/BS_logo.png" width={400} height={106}/>
                         </div>
-
-                        
                         
                     </div>
                 </div>
