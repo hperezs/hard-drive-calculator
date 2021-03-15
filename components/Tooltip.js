@@ -40,7 +40,7 @@ export default function Tooltip({inputType}) {
         },
         videoQuality: {
             title: "Video Quality",
-            description: "In addition to a cameras resolution, the “Bit Rate” can impact the clarity of the video. Bit rate is a software adjustment located in the video recorder. As the bit rate is increased, the video becomes sharper but the file size increases. To calculate the storage requirements for the sharpest video, select “High”. The storage tool will recalculate the required storage based on the larger file size. For most applications, “Normal” should be selected to calculate storage"
+            description: "In addition to a cameras resolution, the “Bit Rate” can impact the clarity of the video. Bit rate is a software adjustment located in the video recorder. As the bit rate is increased, the video becomes sharper but the file size increases. To calculate the storage requirements for the sharpest video, select “High”. The storage tool will recalculate the required storage based on the larger file size. For most applications, “Medium” should be selected to calculate storage"
         },
         fps: {
             title: "Frames per second",

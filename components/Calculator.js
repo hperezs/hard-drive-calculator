@@ -302,7 +302,7 @@ export default function Calculator() {
     return(
         <>
         <div className="w-full flex flex-row justify-center">
-            <Image src='/images/hard_drive_header.png' width={900} height={92}/>
+            <Image src='/images/calculator-header.png' width={900} height={92}/>
         </div>
         
         <div className="flex flex-row justify-center">
