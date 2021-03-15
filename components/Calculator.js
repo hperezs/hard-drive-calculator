@@ -9,7 +9,7 @@ export default function Calculator() {
     const [daysOfStorage, setDaysOfStorage] = useState(1);
     const [recordingType, setRecordingType] = useState("continuous");
     const [videoFormat, setVideoFormat] = useState("h265");
-    const [resolution, setResolution] = useState(8294400);
+    const [resolution, setResolution] = useState(5038848);
     const [videoQuality, setVideoQuality] = useState("medium");
     const [sceneActivity, setSceneActivity] = useState("medium");
     const [fps, setFps] = useState(20);
@@ -309,7 +309,7 @@ export default function Calculator() {
             <div className="bg-bg-texture bg-cover">
                 <section className="border-2 border-green-600 w-900 p-10 text-xl bg-white bg-opacity-30 ">
                 <div className="flex flex-row justify-between ">
-                    <div className="width-42 flex flex-col justify-between py-7">
+                    <div className="width-42 flex flex-col justify-between py-20">
                         <div className="flex flex-row justify-between items-center">
                             <label>Number of cameras:</label>
                             <div>
@@ -360,7 +360,7 @@ export default function Calculator() {
                             
                         </div>
 
-                        <div className=" flex flex-row items-center justify-between">
+                        {/* <div className=" flex flex-row items-center justify-between">
                             <label>Video format:</label>
                             <div>
                                 <select 
@@ -374,25 +374,22 @@ export default function Calculator() {
                                 </select>
                                 <span className="inline-block"><Tooltip inputType="videoFormat" /></span>
                             </div>
-                        </div>
+                        </div> */}
                         
                         <div className=" flex flex-row items-center justify-between">
                             <label>Resolution:</label>
                             <div>
                                 <select name="resolution" className={input_styles} value={resolution} onChange={handleChanges}>
-                                    <option value={8294400}>8MP (4K)</option>
-                                    <option value={6291456}>6MP (3072x2048)</option>
-                                    <option value={5038848}>5MP (2592x1944)</option>
-                                    <option value={4085760}>4MP (2688x1520)</option>
-                                    <option value={3145728}>3MP (2048x1536)</option>
-                                    <option value={2073600}>2MP (1920x1080)</option>
-                                    <option value={921600}>1MP (1280x720)</option>
+                                    <option value={8294400}>4K (8 Megapixel)</option>
+                                    <option value={5038848}>3K (5 Megapixel)</option>
+                                    <option value={4085760}>2K (4 Megapixel)</option>
+                                    <option value={2073600}>1K (2 Megapixel)</option>
                                 </select>
                                 <span className="inline-block"><Tooltip inputType="resolution" /></span>
                             </div>
                         </div>
 
-                        <div className=" flex flex-row items-center justify-between">
+                        {/* <div className=" flex flex-row items-center justify-between">
                             <label>
                                 Video Quality:
                             </label>
@@ -409,7 +406,7 @@ export default function Calculator() {
                                 </select>
                                 <span className="inline-block"><Tooltip inputType="videoQuality" /></span>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="  flex flex-row items-center justify-between">
                             <span>Frames per second (FPS):</span>
