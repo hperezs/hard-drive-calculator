@@ -1,13 +1,11 @@
 {
   "name": "hard-drive-calculator",
   "version": "0.7",
-  "builds": [{ "src": "package.json", "use": "@now/next" }],
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "now-build": "next build"
+    "start": "next start"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.2.1",
