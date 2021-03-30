@@ -35,7 +35,7 @@ export default function Calculator() {
         let bytesTotal = requiredBandwith / 8 * 86400 * daysOfStorage;
 
         if (recordingType == 'motion') {
-            bytesTotal = bytesTotal * 0.45;
+            bytesTotal = bytesTotal * 0.55;
         }
 
         let terabytes = (bytesTotal / (KILOBYTE * KILOBYTE * KILOBYTE * KILOBYTE)).toFixed(3);
@@ -220,14 +220,21 @@ export default function Calculator() {
                         </div>
                         
                         <div style={{width: '400px', height: '570px'}} className="w-6/12 relative bg-hd-graphic bg-cover bg-center">
+                            {/* Required Storage */}
                             <div style={{top: '65px', left: "114px", width: "200px"}} className="absolute py-1 bg-cover bg-center">
                                 <div className="p-3 text-gray-200">
                                     <h4 className="text-lg mb-1 text-center">Storage Required</h4>
                                     <div className="text-center text-3xl font-bold">{requiredStorage} TB</div>
                                 </div>
                             </div>
-                                
-                            <a style={{top: '180px', left:'106px'}} href={recommendedHD.link} target="_blank" className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-4' : 'hidden')}>
+
+                            {/* Recommended Product */}
+                            <a 
+                                style={{top: '180px', left:'106px'}} 
+                                href={recommendedHD.link} 
+                                target="_blank" 
+                                className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-4' : 'hidden')}
+                            >
                                 <h5 className="text-lg mb-1 font-light">Recommended Product</h5>
                                 <div className="py-2">
                                     <div className="flex justify-center mb-1"><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={100} height={76}/></div>
