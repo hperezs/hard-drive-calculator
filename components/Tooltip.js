@@ -52,7 +52,7 @@ export default function Tooltip({inputType}) {
         <>
             <div className="flex flex-wrap">
                 <div className="w-full text-center">
-                    <button className="inline-block align-center text-white ml-2 border rounded-full bg-green-600 cursor-pointer hover:bg-green-400" type="button"
+                    <button className="inline-block align-center text-white ml-2 rounded-full bg-gray-500 cursor-pointer hover:bg-gray-400" type="button"
                         style={
                             {transition: "all .15s ease"}
                         }

@@ -48,8 +48,9 @@ export default function Calculator() {
         updateRecommendedHardDrives(requiredStorage, setRecommendedHD, setIsRecommendedHDSingle, setRecommendedHDMultiplier, setAdditionalHD)
     }, [requiredStorage])
 
-    const input_styles = "ml-5 mt-1 border-green-600 shadow-sm cursor-pointer focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 "; 
-    const productCard_styles = "border border-green-700 bg-white flex flex-col justify-center items-center hover:shadow-lg hover:border-green-500 ";
+    const input_styles = "ml-5 mt-1 shadow-sm cursor-pointer focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 "; 
+    const productCard_styles = "border border-purple-700 rounded bg-white flex flex-col justify-center items-center absolute hover:shadow-lg hover:border-purple-500 ";
+    const doubleProductCard_styles ="border border-purple-700 rounded bg-white flex flex-col justify-center items-center hover:shadow-lg hover:border-purple-500"
 
     const numberOfCameras_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 32, 48, 64];
     const daysOfStorage_options = [];
@@ -93,17 +94,17 @@ export default function Calculator() {
 
     return(
         <>
-        <div className="w-full flex flex-row justify-center">
-            <Image src='/images/calculator-header.png' width={900} height={92}/>
+        <div className="w-full flex flex-row justify-center border-0">
+            <Image src='/images/header.png' width={900} height={130}/>
         </div>
         
-        <div className="flex flex-row justify-center">
+        <div className="flex flex-row justify-center ">
             <div className="bg-bg-texture bg-cover">
-                <section className="border-2 border-green-600 w-900 p-10 text-xl bg-white bg-opacity-30 ">
+                <section className="border-0 w-900 p-10 text-xl">
                     <div className="flex flex-row justify-between ">
                         <div className="width-42 flex flex-col justify-between pt-16">
                             <div className="flex flex-row justify-between items-center">
-                                <label>Number of cameras:</label>
+                                <label className="text-gray-100">Number of cameras:</label>
                                 <div>
                                     <select 
                                     name="numberOfCameras" 
@@ -121,7 +122,7 @@ export default function Calculator() {
                             </div>
 
                             <div className=" flex flex-row justify-between items-center">
-                                <label>Days of storage:</label>
+                                <label className="text-gray-100">Days of storage:</label>
                                 <div>
                                     <select 
                                         name="daysOfStorage" 
@@ -137,7 +138,7 @@ export default function Calculator() {
                             </div>
 
                             <div className=" flex flex-row justify-between items-center">
-                                <label>Recording:</label>
+                                <label className="text-gray-100">Recording:</label>
                                 <div>
                                     <select 
                                         name="recordingType" 
@@ -153,7 +154,7 @@ export default function Calculator() {
                             </div>
 
                             {/* <div className=" flex flex-row items-center justify-between">
-                                <label>Video format:</label>
+                                <label className="text-gray-100">Video format:</label>
                                 <div>
                                     <select 
                                         name="videoFormat" 
@@ -169,7 +170,7 @@ export default function Calculator() {
                             </div> */}
                             
                             <div className=" flex flex-row items-center justify-between">
-                                <label>Resolution:</label>
+                                <label className="text-gray-100">Resolution:</label>
                                 <div>
                                     <select name="resolution" className={input_styles} value={resolution} onChange={handleChanges}>
                                         <option value={8294400}>4K (8 Megapixel)</option>
@@ -182,7 +183,7 @@ export default function Calculator() {
                             </div>
 
                             {/* <div className=" flex flex-row items-center justify-between">
-                                <label>
+                                <label className="text-gray-100">
                                     Video Quality:
                                 </label>
                                 <div>
@@ -201,7 +202,7 @@ export default function Calculator() {
                             </div> */}
 
                             <div className="  flex flex-row items-center justify-between">
-                                <span>Frames per second (FPS):</span>
+                                <label className="text-gray-100">Frames per second (FPS):</label>
                                 <select 
                                     className={input_styles}
                                     name="fps"
@@ -215,51 +216,60 @@ export default function Calculator() {
                                 <span className="inline-block"><Tooltip inputType="fps" /></span>
                             </div>
 
-                            <p className="text-sm pt-10 pb-5">*The values provided are an estimate. Actual performance may vary.</p>
+                            <p className="text-sm pt-10 pb-5 text-gray-300">*The values provided are an estimate. Actual performance may vary.</p>
                         </div>
                         
-                        <div className="w-6/12 flex flex-col">
-                            <div className="p-5 border-2 border-green-700 mt-5 mb-10 bg-white">
-                                <h4 className="text-xl mb-3 text-center">Storage Capacity Required</h4>
-                                <div className="text-center text-3xl">{requiredStorage} TB</div>
+                        <div style={{width: '400px', height: '570px'}} className="w-6/12 relative bg-hd-graphic bg-cover bg-center">
+                            <div style={{top: '65px', left: "114px", width: "200px"}} className="absolute py-1 bg-cover bg-center">
+                                <div className="p-3 text-gray-200">
+                                    <h4 className="text-lg mb-1 text-center">Storage Required</h4>
+                                    <div className="text-center text-3xl font-bold">{requiredStorage} TB</div>
+                                </div>
                             </div>
                                 
-                            <a href={recommendedHD.link} target="_blank" className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-5 h-350' : 'hidden')}>
-                                <h5 className="text-xl mb-3">Recommended Product</h5>
-                                <div className="py-5">
-                                    <div><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
-                                    <div className="text-xl text-center font-light">
+                            <a style={{top: '180px', left:'106px'}} href={recommendedHD.link} target="_blank" className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-4' : 'hidden')}>
+                                <h5 className="text-lg mb-1 font-light">Recommended Product</h5>
+                                <div className="py-2">
+                                    <div className="flex justify-center mb-1"><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={100} height={76}/></div>
+                                    <div className="text-xl text-center">
                                         {recommendedHD.size} Hard Drive  <span className={"text-green-600 font-normal " + (recommendedHDMultiplier ? '' : 'hidden')}> x{recommendedHDMultiplier}</span>
                                     </div>
                                 </div>
                             </a> 
                             
-                            <div className={"h-350 border border-green-600 bg-white flex flex-col items-center justify-between py-7 px-4 " + (!isRecommendedHDSingle && isRecommendedVisible ? '' : 'hidden')}>
-                                <h5 className="text-xl mb-5">Recommended Products</h5>
-                                <div className="flex flex-row justify-evenly items-center mb-7">
-                                    <a href={recommendedHD.link} target="_blank" className={productCard_styles + "p-2"}>
-                                        <div className="py-5">
-                                            <div><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
-                                            <span className="text-base font-normal ml-2">
-                                                {recommendedHD.size} Hard Drive  
-                                                <span className={"text-green-600 font-normal " + (recommendedHDMultiplier ? '' : 'hidden')}> x{recommendedHDMultiplier}</span>
-                                            </span>
-                                        </div>
-                                    </a>
-                                    <div className="text-4xl mx-3 text-green-700">+</div>
-                                    <a href={additionalHD.link} target="_blank" className={productCard_styles + "p-2"}>
-                                        <div className="py-5">
-                                            <div><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={240} height={192}/></div>
-                                            <span className="text-base font-normal ml-5">
-                                                {additionalHD.size} Hard Drive 
-                                            </span>
-                                        </div>
-                                    </a>
+                            {/* For displaying 2 HD's */}
+                            <div 
+                                style={(recommendedHDMultiplier ? {top: '168px', left: "93px"} : {top: '181px', left: "93px"})} 
+                                className={"absolute " + ((!isRecommendedHDSingle && isRecommendedVisible) ? '' : 'hidden')}
+                            >
+                                <div className={"bg-white flex flex-col items-center rounded py-3 px-4"}>
+                                    <h5 className="text-lg mb-1 font-light">Recommended Products</h5>
+                                    <div className="flex flex-row justify-evenly my-4">
+                                        <a href={recommendedHD.link} target="_blank" className={doubleProductCard_styles + "p-2"}>
+                                            <div className="p-3">
+                                                <div className="flex justify-center mb-1"><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={60} height={47}/></div>
+                                                <span className="block text-base font-normal text-center">
+                                                    {recommendedHD.size} HDD 
+                                                    <div className={"text-purple-600 font-normal " + (recommendedHDMultiplier ? '' : 'hidden')}>x{recommendedHDMultiplier}</div>
+                                                </span>
+                                            </div>
+                                        </a>
+                                        <div className="flex flex-col justify-center text-3xl mx-1 text-purple-700">+</div>
+                                        <a href={additionalHD.link} target="_blank" className={doubleProductCard_styles + "p-2"}>
+                                            <div className="p-3">
+                                                <div className="flex justify-center mb-1"><Image src='/images/hard_drive_hero.jpg' alt='hard-drive-hero' width={60} height={47}/></div>
+                                                <span className="block text-base font-normal text-center">
+                                                    {additionalHD.size} HDD
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
+                                
                             </div>
                             
-                            <div className="px-16 mt-10 mb-5">
-                                <Image src="/images/BS_logo.png" width={400} height={106}/>
+                            <div style={{bottom: '100px', left: '70px'}} className="absolute px-16 mt-10 mb-5">
+                                <Image src="/images/graylogo.png" width={160} height={42}/>
                             </div>
                         </div>
                     </div>

@@ -4,11 +4,13 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: theme => ({
-        "bg-texture": "url('/images/texture.png')",
+        "bg-texture": "url('/images/BG-black.png')",
+        "hd-graphic": "url('/images/HD-graphic.png')",
+        "small-box": "url('/images/smallbox.png')"
       }),
       colors: theme => ({
         "green-tooltip": "#349e51",
-        "gray-tooltip": "#414241"
+        "gray-tooltip": "#414241",
       })
     },
   },
