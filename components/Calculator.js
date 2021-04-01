@@ -95,7 +95,7 @@ export default function Calculator() {
     return(
         <>
         <div className="w-full flex flex-row justify-center border-0">
-            <Image src='/images/header.png' width={900} height={130}/>
+            <Image src='/images/header.png' width={900} height={105}/>
         </div>
         
         <div className="flex flex-row justify-center ">
