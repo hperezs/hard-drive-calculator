@@ -21,6 +21,12 @@ export default function Calculator() {
     const [isRecommendedVisible, setIsRecommendedVisible] = useState(true);
     const [recommendedHDMultiplier, setRecommendedHDMultiplier] = useState(0);
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        setIsMobile(window.matchMedia('(max-width: 550px)').matches)
+   }, [])
+
     const KILOBYTE = 1000;
 
     // Calculate formatQualityActivity whenever values change
@@ -48,7 +54,7 @@ export default function Calculator() {
         updateRecommendedHardDrives(requiredStorage, setRecommendedHD, setIsRecommendedHDSingle, setRecommendedHDMultiplier, setAdditionalHD)
     }, [requiredStorage])
 
-    const input_styles = "ml-5 mt-1 shadow-sm cursor-pointer focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 "; 
+    const input_styles = "ml-2 mt-1 shadow-sm cursor-pointer focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50 sm:text-sm"; 
     const productCard_styles = "border border-purple-700 rounded bg-white flex flex-col justify-center items-center absolute hover:shadow-lg hover:border-purple-500 ";
     const doubleProductCard_styles ="border border-purple-700 rounded bg-white flex flex-col justify-center items-center hover:shadow-lg hover:border-purple-500"
 
@@ -95,14 +101,14 @@ export default function Calculator() {
     return(
         <>
         <div className="w-full flex flex-row justify-center border-0">
-            <Image src='/images/header.png' width={900} height={105}/>
+            <Image src={`/images/header${isMobile ? '_mobile' : ''}.png`} width={isMobile ? 375 : 900} height={isMobile ? 72 : 105}/>
         </div>
         
         <div className="flex flex-row justify-center ">
-            <div className="bg-bg-texture bg-cover">
-                <section className="border-0 w-900 p-10 text-xl">
-                    <div className="flex flex-row justify-between ">
-                        <div className="width-42 flex flex-col justify-between pt-16">
+            <div className="bg-bg-texture bg-cover pb-10">
+                <section className="calculator-content border-0 lg:p-10 sm:text-sm md:text-xl">
+                    <div className="flex flex-row justify-center md:justify-between flex-wrap p-5">
+                        <div className="inputs-container flex flex-col justify-between lg:pt-16">
                             <div className="flex flex-row justify-between items-center">
                                 <label className="text-gray-100">Number of cameras:</label>
                                 <div>
@@ -116,7 +122,7 @@ export default function Calculator() {
                                             return(<option key={number}>{number}</option>)
                                         })}
                                     </select>
-                                    <span className="inline-block"><Tooltip inputType="numberOfCameras" /></span>
+                                    <span className="inline-block"><Tooltip isMobile={isMobile} inputType="numberOfCameras" /></span>
                                 </div>
                                 
                             </div>
@@ -132,7 +138,7 @@ export default function Calculator() {
                                     >
                                         {daysOfStorage_options}
                                     </select>
-                                    <span className="inline-block"><Tooltip inputType="daysOfStorage" /></span>
+                                    <span className="inline-block"><Tooltip isMobile={isMobile} inputType="daysOfStorage" /></span>
                                 </div>
                                 
                             </div>
@@ -148,7 +154,7 @@ export default function Calculator() {
                                         <option value="continuous">Continuous</option>
                                         <option value="motion">Motion Activated</option>
                                     </select>
-                                    <span className="inline-block"><Tooltip inputType="recordingType" /></span>
+                                    <span className="inline-block"><Tooltip isMobile={isMobile} inputType="recordingType" /></span>
                                 </div>
                                 
                             </div>
@@ -165,7 +171,7 @@ export default function Calculator() {
                                         <option value="h264">H264</option>
                                         <option value="h265">H265</option>
                                     </select>
-                                    <span className="inline-block"><Tooltip inputType="videoFormat" /></span>
+                                    <span className="inline-block"><Tooltip isMobile={isMobile} inputType="videoFormat" /></span>
                                 </div>
                             </div> */}
                             
@@ -178,7 +184,7 @@ export default function Calculator() {
                                         <option value={4085760}>2K (4 Megapixel)</option>
                                         <option value={2073600}>1K (2 Megapixel)</option>
                                     </select>
-                                    <span className="inline-block"><Tooltip inputType="resolution" /></span>
+                                    <span className="inline-block"><Tooltip isMobile={isMobile} inputType="resolution" /></span>
                                 </div>
                             </div>
 
@@ -197,31 +203,33 @@ export default function Calculator() {
                                         <option value="medium">Medium</option>
                                         <option value="low">Low</option>
                                     </select>
-                                    <span className="inline-block"><Tooltip inputType="videoQuality" /></span>
+                                    <span className="inline-block"><Tooltip isMobile={isMobile} inputType="videoQuality" /></span>
                                 </div>
                             </div> */}
 
                             <div className="  flex flex-row items-center justify-between">
                                 <label className="text-gray-100">Frames per second (FPS):</label>
-                                <select 
-                                    className={input_styles}
-                                    name="fps"
-                                    value={fps}
-                                    onChange={handleChanges}    
-                                >
-                                    {fps_options.map(number => {
-                                        return(<option key={number}>{number}</option>)
-                                    })}
-                                </select>
-                                <span className="inline-block"><Tooltip inputType="fps" /></span>
+                                <div>
+                                    <select 
+                                        className={input_styles}
+                                        name="fps"
+                                        value={fps}
+                                        onChange={handleChanges}    
+                                    >
+                                        {fps_options.map(number => {
+                                            return(<option key={number}>{number}</option>)
+                                        })}
+                                    </select>
+                                    <span className="inline-block"><Tooltip isMobile={isMobile} inputType="fps" /></span>
+                                </div>
                             </div>
 
                             <p className="text-sm pt-10 pb-5 text-gray-300">*The values provided are an estimate. Actual performance may vary.</p>
                         </div>
                         
-                        <div style={{width: '400px', height: '570px'}} className="w-6/12 relative bg-hd-graphic bg-cover bg-center">
+                        <div className="recommended-container relative bg-hd-graphic bg-cover bg-center">
                             {/* Required Storage */}
-                            <div style={{top: '65px', left: "114px", width: "200px"}} className="absolute py-1 bg-cover bg-center">
+                            <div className="required-storage absolute py-1 bg-cover bg-center">
                                 <div className="p-3 text-gray-200">
                                     <h4 className="text-lg mb-1 text-center">Storage Required</h4>
                                     <div className="text-center text-3xl font-bold">{requiredStorage} TB</div>
@@ -230,10 +238,9 @@ export default function Calculator() {
 
                             {/* Recommended Product */}
                             <a 
-                                style={{top: '180px', left:'106px'}} 
                                 href={recommendedHD.link} 
                                 target="_blank" 
-                                className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-4' : 'hidden')}
+                                className={productCard_styles + (isRecommendedHDSingle && isRecommendedVisible ? 'p-4 recommended-single' : 'hidden')}
                             >
                                 <h5 className="text-lg mb-1 font-light">Recommended Product</h5>
                                 <div className="py-2">
@@ -246,8 +253,7 @@ export default function Calculator() {
                             
                             {/* For displaying 2 HD's */}
                             <div 
-                                style={(recommendedHDMultiplier ? {top: '168px', left: "93px"} : {top: '181px', left: "93px"})} 
-                                className={"absolute " + ((!isRecommendedHDSingle && isRecommendedVisible) ? '' : 'hidden')}
+                                className={"absolute " + ((!isRecommendedHDSingle && isRecommendedVisible) ? '' : 'hidden') + (recommendedHDMultiplier ? ' recommended-with-multiplier' : ' recommended-double')}
                             >
                                 <div className={"bg-white flex flex-col items-center rounded py-3 px-4"}>
                                     <h5 className="text-lg mb-1 font-light">Recommended Products</h5>
@@ -275,7 +281,7 @@ export default function Calculator() {
                                 
                             </div>
                             
-                            <div style={{bottom: '100px', left: '70px'}} className="absolute px-16 mt-10 mb-5">
+                            <div className="bs-logo absolute px-16 mt-10 mb-5">
                                 <Image src="/images/graylogo.png" width={160} height={42}/>
                             </div>
                         </div>

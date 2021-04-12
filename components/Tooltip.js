@@ -2,13 +2,13 @@ import React from 'react'
 import Popper from 'popper.js';
 import {BsInfo} from 'react-icons/bs'
 
-export default function Tooltip({inputType}) {
+export default function Tooltip({inputType, isMobile}) {
     const [tooltipShow, setTooltipShow] = React.useState(false);
     const btnRef = React.createRef();
     const tooltipRef = React.createRef();
 
     const openLeftTooltip = () => {
-        new Popper(btnRef.current, tooltipRef.current, {placement: "right"});
+        new Popper(btnRef.current, tooltipRef.current, {placement: (isMobile ? 'left' : 'right')});
         setTooltipShow(true);
     };
 
