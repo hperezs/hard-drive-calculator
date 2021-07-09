@@ -27,6 +27,16 @@ a {
   height: 350px;
 }
 
+.header-picture {
+  max-width: 900px;
+}
+
+@media screen and (max-width: 600px) {
+  .header-picture { 
+    width: 100%;
+  }
+}
+
 .inputs-container {
   width: 42%;
 }

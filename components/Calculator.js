@@ -101,7 +101,7 @@ export default function Calculator() {
     return(
         <>
         <div className="w-full flex flex-row justify-center border-0">
-            <Image src={`/images/header${isMobile ? '_mobile' : ''}.png`} width={isMobile ? 375 : 900} height={isMobile ? 72 : 105}/>
+            <img className="header-picture" src="/images/header.png"/>
         </div>
         
         <div className="flex flex-row justify-center ">
