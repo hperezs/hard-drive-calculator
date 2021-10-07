@@ -115,13 +115,13 @@ export default function Calculator() {
                     <div className="flex flex-row justify-center md:justify-between flex-wrap p-5">
                         <div className="inputs-container flex flex-col justify-between lg:pt-10">
                             <div className="flex items-center justify-evenly text-gray-100">
-                                <div className="flex items-center">
+                                <div className="flex items-center" onClick={() => setIsProVueChecked(true)}>
                                     <input type="radio" checked={isProVueChecked} onChange={(e) => setIsProVueChecked(e.target.checked)}/> 
-                                    <span className="cursor-pointer ml-2" onClick={() => setIsProVueChecked(true)}>ProVue</span>
+                                    <span className="cursor-pointer ml-2">ProVue</span>
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-center" onClick={() => setIsProVueChecked(false)}>
                                     <input type="radio" checked={!isProVueChecked} onChange={(e) => setIsProVueChecked(!e.target.checked)}/>
-                                    <span className="cursor-pointer ml-2" onClick={() => setIsProVueChecked(false)}>CyberSecure</span>
+                                    <span className="cursor-pointer ml-2" >CyberSecure</span>
                                 </div>
                             </div>
                             <div className="flex flex-row justify-between items-center">
