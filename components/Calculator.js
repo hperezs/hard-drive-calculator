@@ -20,6 +20,7 @@ export default function Calculator() {
     const [additionalHD, setAdditionalHD] = useState(products.TB1);
     const [isRecommendedVisible, setIsRecommendedVisible] = useState(true);
     const [recommendedHDMultiplier, setRecommendedHDMultiplier] = useState(0);
+    const [isProVueChecked, setIsProVueChecked] = useState(true);
 
     const [isMobile, setIsMobile] = useState(false);
 
@@ -46,8 +47,12 @@ export default function Calculator() {
 
         let terabytes = (bytesTotal / (KILOBYTE * KILOBYTE * KILOBYTE * KILOBYTE)).toFixed(3);
 
-        setRequiredStorage(terabytes);
-    }, [formatQualityActivity, resolution, numberOfCameras, fps, daysOfStorage, recordingType])
+        if(isProVueChecked) {
+            setRequiredStorage(terabytes);
+        } else {
+            setRequiredStorage(terabytes * 0.5);
+        }
+    }, [formatQualityActivity, resolution, numberOfCameras, fps, daysOfStorage, recordingType, isProVueChecked])
 
     // Change recommended product when requiredStorage changes
     useEffect(() => {
@@ -108,7 +113,17 @@ export default function Calculator() {
             <div className="bg-bg-texture bg-cover pb-10">
                 <section className="calculator-content border-0 lg:p-10 sm:text-sm md:text-xl">
                     <div className="flex flex-row justify-center md:justify-between flex-wrap p-5">
-                        <div className="inputs-container flex flex-col justify-between lg:pt-16">
+                        <div className="inputs-container flex flex-col justify-between lg:pt-10">
+                            <div className="flex items-center justify-evenly text-gray-100">
+                                <div className="flex items-center">
+                                    <input type="radio" checked={isProVueChecked} onChange={(e) => setIsProVueChecked(e.target.checked)}/> 
+                                    <span className="cursor-pointer ml-2" onClick={() => setIsProVueChecked(true)}>ProVue</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <input type="radio" checked={!isProVueChecked} onChange={(e) => setIsProVueChecked(!e.target.checked)}/>
+                                    <span className="cursor-pointer ml-2" onClick={() => setIsProVueChecked(false)}>CyberSecure</span>
+                                </div>
+                            </div>
                             <div className="flex flex-row justify-between items-center">
                                 <label className="text-gray-100">Number of cameras:</label>
                                 <div>
